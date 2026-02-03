@@ -1,0 +1,65 @@
+schema_version: 1
+
+context:
+  name: depfinder
+  version: 2.10.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/depfinder-${{ version }}.tar.gz
+  sha256: cbaf7c10d53689df8d0893193ff0eaf728e0f541bd935c464d33c614dc662791
+
+build:
+  number: 3
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+  python:
+    entry_points:
+      - depfinder = depfinder.cli:cli
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+  host:
+    - pip
+    - python ${{ python_min }}.*
+    - setuptools
+  run:
+    - python >=${{ python_min }}
+    - pyyaml
+    - requests
+
+tests:
+  - python:
+      imports:
+        - depfinder
+      python_version:
+        - ${{ python_min }}.*
+        - *
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+      - depfinder --help
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Find all the unique imports in your library
+  homepage: http://github.com/ericdill/depfinder
+
+extra:
+  recipe-maintainers:
+    - ericdill
+    - mariusvniekerk
+    - tonyfast
+    - ocefpaf
+    - CJ-Wright
+    - beckermr
