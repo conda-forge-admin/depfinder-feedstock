@@ -1,15 +1,14 @@
 schema_version: 1
 
 context:
-  name: depfinder
   version: 2.10.0
 
 package:
-  name: ${{ name|lower }}
+  name: depfinder
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/depfinder-${{ version }}.tar.gz
+  url: https://pypi.org/packages/source/d/depfinder/depfinder-${{ version }}.tar.gz
   sha256: cbaf7c10d53689df8d0893193ff0eaf728e0f541bd935c464d33c614dc662791
 
 build:
@@ -21,11 +20,6 @@ build:
       - depfinder = depfinder.cli:cli
 
 requirements:
-  build:
-    - if: build_platform != target_platform
-      then:
-        - python
-        - cross-python_${{ target_platform }}
   host:
     - pip
     - python ${{ python_min }}.*
