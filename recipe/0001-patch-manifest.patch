@@ -6,4 +6,4 @@ index bc6fd05..683c148 100644
  include depfinder/_version.py
  include requirements.txt
  include LICENSE
-+inlcude depfinder/pkg_data/*
++include depfinder/pkg_data/*
