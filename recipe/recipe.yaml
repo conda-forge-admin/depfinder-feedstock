@@ -10,6 +10,8 @@ package:
 source:
   url: https://github.com/ericdill/depfinder/archive/refs/tags/v${{ version }}.tar.gz
   sha256: 89014b6d9a5d559e8d189c9f990764a7e8e229203077074d58a320fd14de2b7d
+  patches:
+    - 0001-patch-manifest.patch
 
 build:
   number: 0
